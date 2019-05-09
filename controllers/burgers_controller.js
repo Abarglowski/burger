@@ -15,20 +15,21 @@ router.get("/", function(req, res) {
   });
   
   router.post("/burgers", function(req, res) {
-    burger.insertOne(
-    'burger_name',
-    req.body.burger_name,
+    burger.insertOne([
+    'burger_name'
+    ], [
+    req.body.burger_name
+    ],
     function(result) {
       res.redirect('/');
     });
   });
   
   router.put("/burgers/:id", function(req, res) {
+    console.log("this hit");
     var condition = "id = " + req.params.id;
-    burger.updateOne({
-      devoured: true
-    }, condition, function(result) {
-        res.redirect('/');
+    burger.updateOne(condition, function(result) {
+        res.end();
       
     });
   });

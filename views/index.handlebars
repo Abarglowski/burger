@@ -2,14 +2,13 @@
 <main>
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
                 {{#each burgers}}
                 {{#unless this.devoured}}
                 <div>
-                    <form action="/burgers/{{this.id}}" method="PUT">{{this.burger_name}}
-                    <input type="hidden" name="devoured" value="1">
-                    <button data-id="{{id}}" data-devoured="true">Eat the burger</button>
-                    </form>
+                    {{this.burger_name}}
+                    <button data-id="{{this.id}}" class="update-burger" data-devoured="false">Eat the burger</button>
+
                 </div>
                 {{/unless}}
                 {{/each}}
@@ -17,20 +16,53 @@
 
 
 
-            <div class="col-6">
+            <div class="col-md-6">
                 <h2>Devoured Burgers</h2>
                 {{#each burgers}}
                 {{#if this.devoured}}
-                    <div>{{this.burger_name}}</div>
+                <div>{{this.burger_name}}</div>
+                {{/if}}
+                {{/each}}
             </div>
-            {{/if}}
-            {{/each}}
         </div>
     </div>
 
 </main>
 <h2>Add a Burger</h2>
 <form action="/burgers" method="POST">
-<input type = "text" id="name" name="burger_name">
-<button type="submit" class="addBurger">Add Burger</button>
+    <input type="text" id="name" name="burger_name">
+    <button type="submit" class="addBurger">Add Burger</button>
 </form>
+
+<script>
+    // do logic here
+    // set up onClick event for .update-burger
+    $(document).on("click", ".update-burger", function (event) {
+
+        const burgerId = $(this).attr("data-id");
+        const burgerDevour = $(this).attr("data-devoured");
+        $(this).data("devoured", true);
+        const burgerEaten = { devoured: true };
+
+
+        $.ajax({
+            url: "/burgers/" + burgerId,
+            method: "PUT",
+            data: burgerEaten
+        }).then(function () {
+            console.log("burger devoured");
+            location.reload();
+        })
+    });
+   // const burgerId = $(this).attr("data-id");
+   // const burgerDevour = $(this).attr("devoured");
+
+
+        // retrieve id of burger using .attr()
+        // retrieve value of devoured using .attr()
+
+
+        // run ajax PUT request to /api/burgers/burgerID
+        // in .then() of put request, use location.reload() to refresh the page
+
+</script>
