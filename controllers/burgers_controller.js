@@ -7,7 +7,7 @@ var path = require("path");
 var burger = require("../models/burger.js");
 
 router.get("/", function(req,res){
-  res..json(path.join(__dirname,"public/index.html"));
+  res..json(path.join(__dirname,"../views/index.handlebars"));
 })
 
 router.get("/", function(req, res) {
