@@ -5,7 +5,7 @@ var path = require("path");
 var burger = require("../models/burger.js");
 
 router.get("/", function(req, res) {
-    res.json(path.join(__dirname, "index"));
+    res.json(path.join(__dirname, "../views/index.handlebars"));
     burger.selectAll(function(data) {
       var hbsObject = {
         burgers: data
