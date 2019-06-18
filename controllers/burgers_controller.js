@@ -37,7 +37,7 @@ router.get("/", function(req, res) {
   router.delete("/burgers/:id", function(req,res) {
     console.log("this hit");
     var condition = "id = " + req.params.id;
-    burger.deleteOne(conition, function(result) {
+    burger.deleteOne(condition, function(result) {
       res.end();
     })
   })
