@@ -1,11 +1,15 @@
-<h2>Delicious Burgers</h2>
+<h2 class="text-center my-3">Delicious Burgers</h2>
 <main>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
+    <div class="container my-5">
+        <div class="row my-5"></div>
+        <div class="row my-5">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <h2>Available Burgers</h2>
                 {{#each burgers}}
                 {{#unless this.devoured}}
                 <div>
+                    <i class="fas fa-hamburger"></i>
                     {{this.burger_name}}
                     <button data-id="{{this.id}}" class="update-burger" data-devoured="false">Eat the burger</button>
 
@@ -14,25 +18,28 @@
                 {{/each}}
             </div>
 
+<div class="col-md-5"></div>
 
-
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <h2>Devoured Burgers</h2>
                 {{#each burgers}}
                 {{#if this.devoured}}
                 <div>
                     {{this.burger_name}}
-                    <button data-id="{{this.id}}" class="delete-burger">Remove the burger</button>
+                    <button data-id="{{this.id}}" class="delete-burger"><i class="fas fa-trash"></i></button>
+                    
                 </div>
                 {{/if}}
                 {{/each}}
             </div>
         </div>
     </div>
-
 </main>
-<h2>Add a Burger</h2>
-<form action="/burgers" method="POST">
+<div class="row my-5"></div>
+<div class="row my-5"></div>
+<div class="row mt-4"></div>
+<h2 class="text-center text-danger">Order a burger</h2>
+<form class="text-center" action="/burgers" method="POST">
     <input type="text" id="name" name="burger_name">
     <button type="submit" class="addBurger">Add Burger</button>
 </form>
