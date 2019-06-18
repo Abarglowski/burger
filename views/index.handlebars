@@ -20,7 +20,10 @@
                 <h2>Devoured Burgers</h2>
                 {{#each burgers}}
                 {{#if this.devoured}}
-                <div>{{this.burger_name}}</div>
+                <div>
+                    {{this.burger_name}}
+                    <button data-id="{{this.id}}" class="delete-burger">Remove the burger</button>
+                </div>
                 {{/if}}
                 {{/each}}
             </div>
@@ -54,6 +57,17 @@
             location.reload();
         })
     });
+
+    $(document).on("click", ".delete-burger", function (event) {
+        const burgerId = $(this).attr("data-id");
+        $.ajax({
+            url: "/burgers/" + burgerId,
+            method: "DELETE"  
+        }).then(function () {
+            console.log("burger removed");
+            location.reload();
+        })
+    })
    // const burgerId = $(this).attr("data-id");
    // const burgerDevour = $(this).attr("devoured");
 

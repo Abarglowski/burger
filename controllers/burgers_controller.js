@@ -27,12 +27,19 @@ router.get("/", function(req, res) {
   });
   
   router.put("/burgers/:id", function(req, res) {
-    console.log("this hit");
     var condition = "id = " + req.params.id;
     burger.updateOne(condition, function(result) {
         res.end();
       
     });
   });
+
+  router.delete("/burgers/:id", function(req,res) {
+    console.log("this hit");
+    var condition = "id = " + req.params.id;
+    burger.deleteOne(conition, function(result) {
+      res.end();
+    })
+  })
 
   module.exports = router;
